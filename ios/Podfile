@@ -11,6 +11,13 @@ target 'sseup' do
     # to enable hermes on iOS, change `false` to `true` and then install pods
     :hermes_enabled => false
   )
+  # Add the Firebase pod for Google Analytics
+  pod 'Firebase/Analytics'
+  
+  # Add the pods for any other Firebase products you want to use in your app
+  # For example, to use Firebase Authentication and Cloud Firestore
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
 
   target 'sseupTests' do
     inherit! :complete
@@ -21,9 +28,9 @@ target 'sseup' do
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
   # you should disable the next line.
-  use_flipper!()
+  # use_flipper!()
 
-  post_install do |installer|
-    react_native_post_install(installer)
-  end
+  # post_install do |installer|
+  #   react_native_post_install(installer)
+  # end
 end
