@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "88821536838",
+    "project_id": "sseup2",
+    "storage_bucket": "sseup2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88821536838:android:371f4d9f1a688328629247",
+        "android_client_info": {
+          "package_name": "com.sseup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "88821536838-6fi6e6v5gr48iirc9agke00fgfppafhk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_THkGOiJdA0upOQfqbx9JL4XONMrNpI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "88821536838-6fi6e6v5gr48iirc9agke00fgfppafhk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "88821536838-lc46l29i48uahikq6fb04vhtga17f61p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.sseup"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
