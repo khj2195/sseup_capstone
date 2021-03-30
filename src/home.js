@@ -9,23 +9,22 @@ import thirdTab from './thirdTab';
 
 const Tab = createBottomTabNavigator();
 
-// const TabBarIcon = (focused, name) => {
-//  let iconName, iconSize
-//  if (name === '홈') {
-//   iconName = focused? 'home' : 'home-outline'
-//  } else if (name === '레포트') {
-//   iconName = focused? 'document-text' : 'document-text-outline'
-//  } else if (name === 'MY') {
-//   iconName = focused? 'person' : 'person-outline'
-//  }
-//  iconSize= 30
-//  return (
-//    <Icons 
-//     name = {iconName}
-//     size= {iconSize}
-//    />
-//  )
-//  }
+const TabBarIcon = (focused, name) => {
+ let iconName, iconSize
+ if (name === '홈') {
+  iconName = focused? require('./assets/images/home_click.png') : require('./assets/images/home.png')
+ } else if (name === '레포트') {
+  iconName = focused? require('./assets/images/chat_click.png') : require('./assets/images/chat.png')
+ } else if (name === 'MY') {
+  iconName = focused? require('./assets/images/user_click.png') : require('./assets/images/user.png')
+ }
+ return (
+   <Image 
+    source = {iconName}
+    style= {{height:25, width:25}}
+   />
+ )
+ }
 
 const HomeScreenTab =()=> {
     
@@ -34,7 +33,7 @@ const HomeScreenTab =()=> {
       initialRouteName ="홈"
       screenOptions = {({route})=>({
         tabBarLabel: route.name,
-        // tabBarIcon: ({focused})=> TabBarIcon(focused, route.name)
+        tabBarIcon: ({focused})=> TabBarIcon(focused, route.name)
       })}  
     >
       <Tab.Screen name="홈" component={firstTab} />

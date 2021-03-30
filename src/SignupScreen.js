@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {View, Text, TouchableOpacity, Platform, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, Platform, StyleSheet, Alert} from 'react-native';
 import FormInput from './components/FormInput';
 import FormButton from './components/FormButton';
 import {AuthContext} from './AuthProvider';
@@ -7,6 +7,7 @@ import {AuthContext} from './AuthProvider';
 const SignupScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState();
 
   const {register} = useContext(AuthContext);
 
@@ -17,7 +18,7 @@ const SignupScreen = ({navigation}) => {
       <FormInput
         labelValue={email}
         onChangeText={(userEmail) => setEmail(userEmail)}
-        placeholderText="Email"
+        placeholderText="이메일을 입력해주세요. 예) Example@example.com"
         iconType="user"
         keyboardType="email-address"
         autoCapitalize="none"
@@ -27,14 +28,35 @@ const SignupScreen = ({navigation}) => {
       <FormInput
         labelValue={password}
         onChangeText={(userPassword) => setPassword(userPassword)}
-        placeholderText="Password"
+        placeholderText="비밀번호를 입력해주세요."
+        iconType="lock"
+        secureTextEntry={true}
+      />
+
+      <FormInput
+        labelValue={confirmPassword}
+        onChangeText={(userPassword) => setConfirmPassword(userPassword)}
+        placeholderText="비밀번호를 다시 한번 입력해주세요."
         iconType="lock"
         secureTextEntry={true}
       />
 
       <FormButton
         buttonTitle="Sign Up"
-        onPress={() => register(email, password)}
+        onPress={() => {
+          if(email.length===0){
+            Alert.alert('이메일을 형식에 맞게 입력해 주세요. 예) Example@example.com')
+          }
+          else if(password.length<6){
+            Alert.alert('비밀번호를 6자 이상 입력해 주세요.')
+          }
+          else if(password===confirmPassword){
+            register(email, password)
+          }
+          else{
+            Alert.alert('비밀번호가 서로 일치하지 않습니다.')
+          }
+          }}
       />
 
       <View style={styles.textPrivate}>

@@ -6,13 +6,6 @@ import firestore from '@react-native-firebase/firestore';
 export const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
-    const getCurrentTime=()=>{
-      var date = new Date().getDate();
-      var month = new Date().getMonth()+1;
-      var year = new Date().getFullYear();
-      var time=new Date().toLocaleTimeString();
-      return year + '-' + month + '-' + date + '-' + time;
-    }
     const [users,setUsers] = useState(null);
     const [Id, setId] = useState();
     const emailID= auth().currentUser.email.split("@")[0];
@@ -73,7 +66,10 @@ const AuthProvider = ({children}) => {
                 })},
                 register: async (email, password) => {
                     try {
-                      await auth().createUserWithEmailAndPassword(email, password);
+                      await auth().createUserWithEmailAndPassword(email, password)
+                      .then(()=>{
+                        Alert.alert('회원가입이 완료되었습니다! 로그인해주세요.');
+                      })
                     } catch (e) {
                       console.log(e);
                     }

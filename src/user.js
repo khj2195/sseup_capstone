@@ -160,44 +160,52 @@ class UserScreen extends Component {
         </TouchableOpacity>
 
         <View style={styles.controls}>
-          <View style={styles.generalControls}>
-            {/* <View style={styles.rateControl}>
+          {/* <View style={styles.generalControls}>
+            <View style={styles.rateControl}>
               {this.renderRateControl(0.25)}
               {this.renderRateControl(0.5)}
               {this.renderRateControl(1.0)}
               {this.renderRateControl(1.5)}
               {this.renderRateControl(2.0)}
-            </View> */}
+            </View>
 
-            {/* <View style={styles.volumeControl}>
+            <View style={styles.volumeControl}>
               {this.renderVolumeControl(0.5)}
               {this.renderVolumeControl(1)}
               {this.renderVolumeControl(1.5)}
-            </View> */}
+            </View>
 
-            {/* <View style={styles.resizeModeControl}>
+            <View style={styles.resizeModeControl}>
               {this.renderResizeModeControl('cover')}
               {this.renderResizeModeControl('contain')}
               {this.renderResizeModeControl('stretch')}
-            </View> */}
-          </View>
+            </View>
+          </View> */}
 
           {/* <View style={styles.trackingControls}> */}
             <View style={styles.progress}>
               <View style={[styles.innerProgressCompleted, {flex: flexCompleted}]} />
               <View style={[styles.innerProgressRemaining, {flex: flexRemaining}]} />
             </View>
+            <View style={{flex:1}}>
+            <FormButton
+                buttonTitle="체크리스트 작성하러 가기"
+                onPress={()=>{
+                    this.props.navigation.navigate('userChecklist')
+                }}
+            />
+          </View>
           {/* </View> */}
         </View>
         </View>
-      //   <View style={{flex:1}}>
-      //       <FormButton
-      //           buttonTitle="체크리스트 작성하러 가기"
-      //           onPress={()=>{
-      //               this.props.navigation.navigate('userChecklist')
-      //           }}
-      //       />
-      //   </View>
+        // <View style={{flex:1}}>
+        //     <FormButton
+        //         buttonTitle="체크리스트 작성하러 가기"
+        //         onPress={()=>{
+        //             this.props.navigation.navigate('userChecklist')
+        //         }}
+        //     />
+        // </View>
       // </View>
     );
   }
