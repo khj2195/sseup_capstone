@@ -3,71 +3,11 @@ import React, {Component} from 'react';
 import { StyleSheet, View, Text, Button, TouchableOpacity, Dimensions } from 'react-native';
 import FormButton from './components/FormButton';
 import Video from 'react-native-video';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
-
-// class UserScreen extends Component {
-  
-//   render (){
-//     return(
-//         <View>
-//         <View style={{height: windowHeight/2, width: windowWidth, marginTop:30}}>
-//             <Video 
-//               source={require('./assets/videos/DryingLime.mp4')}   // Can be a URL or a local file.
-//               ref={(ref) => {
-//                 this.player = ref
-//               }}                                      // Store reference
-//               onBuffer={this.onBuffer}                // Callback when remote video is buffering
-//               onError={this.videoError}               // Callback when video cannot be loaded
-//               style={styles.backgroundVideo} 
-//               paused={this.paused}
-//               resizeMode='contain'
-//             />
-//             </View>
-//             <View>
-//               <FormButton
-//                 buttonTitle="체크리스트 작성하러 가기"
-//                 onPress={()=>{
-//                     this.props.navigation.navigate('userChecklist')
-//                 }}
-//               />
-//             </View>
-//       </View>
-//     )
-//   }
-// }
-// const styles= StyleSheet.create({
-//   videoElementView: {
-//       marginTop:40,
-//       marginBottom:60,
-//       marginLeft: 5,
-//       marginRight: 5,
-//       padding: 30,
-//       flex:1,
-//       alignItems: 'center',
-//       justifyContent: 'center',
-//       backgroundColor: 'white',
-//       borderRadius: 10,
-//       shadowColor: "#000",
-//       shadowOffset: {
-//         width: 5,
-//         height: 10,  
-//       },
-//       elevation: 15
-//   },
-//   backgroundVideo: {
-//     position: 'absolute',
-//     top: 20,
-//     left: 0,
-//     bottom: 0,
-//     right: 0,
-//   },
-// });
-
-
-// export default UserScreen;
-
 
 class UserScreen extends Component {
   constructor(props) {
@@ -83,6 +23,7 @@ class UserScreen extends Component {
     resizeMode: 'contain',
     duration: 0.0,
     currentTime: 0.0,
+    inhalerState: 0,
   };
 
   onLoad(data) {
@@ -137,16 +78,30 @@ class UserScreen extends Component {
     )
   }
 
+  async firePromise() {
+    try {
+      const snap = await firestore().collection(auth().currentUser.email.split("@")[0]).doc(auth().currentUser.email.split("@")[0]).get();
+      console.log('불러온 inhalertype!!: ',snap.get('InhalerType'));
+      this.setState({inhalerState: Number(snap.get('InhalerType'))});
+      console.log('inhalerState: ',inhalerState);
+    } catch (error) {
+      throw error;
+    }
+  }
+  componentDidMount(){
+    this.firePromise();
+  }
   render() {
     const flexCompleted = this.getCurrentTimePercentage() * 100;
     const flexRemaining = (1 - this.getCurrentTimePercentage()) * 100;
-
+    // this.firePromise();
     return (
       <View style={styles.container}>
         {/* <View style={{flex:10}}> */}
-        <TouchableOpacity style={styles.fullScreen} onPress={() => {this.setState({paused: !this.state.paused})}}>
-          <Video 
-              source={require('./assets/videos/DryingLime.mp4')}   // Can be a URL or a local file.
+        <TouchableOpacity style={styles.fullScreen} activeOpacity={1} onPress={() => {this.setState({paused: !this.state.paused})}}>
+           <Video 
+              source={this.state.inhalerState===1? require('./assets/videos/MDI_video.mp4') : require('./assets/videos/Seretide_diskus_video.mp4')}   // Can be a URL or a local file.
+              // source={{uri: "https://www.youtube.com/watch?v=tY1M7TBMdxQ"}}
               style={styles.fullScreen}
               // rate={this.state.rate}
               paused={this.state.paused}
@@ -158,31 +113,7 @@ class UserScreen extends Component {
               onEnd={() => { console.log('Done!') }}
               repeat={true} />
         </TouchableOpacity>
-
         <View style={styles.controls}>
-          {/* <View style={styles.generalControls}>
-            <View style={styles.rateControl}>
-              {this.renderRateControl(0.25)}
-              {this.renderRateControl(0.5)}
-              {this.renderRateControl(1.0)}
-              {this.renderRateControl(1.5)}
-              {this.renderRateControl(2.0)}
-            </View>
-
-            <View style={styles.volumeControl}>
-              {this.renderVolumeControl(0.5)}
-              {this.renderVolumeControl(1)}
-              {this.renderVolumeControl(1.5)}
-            </View>
-
-            <View style={styles.resizeModeControl}>
-              {this.renderResizeModeControl('cover')}
-              {this.renderResizeModeControl('contain')}
-              {this.renderResizeModeControl('stretch')}
-            </View>
-          </View> */}
-
-          {/* <View style={styles.trackingControls}> */}
             <View style={styles.progress}>
               <View style={[styles.innerProgressCompleted, {flex: flexCompleted}]} />
               <View style={[styles.innerProgressRemaining, {flex: flexRemaining}]} />

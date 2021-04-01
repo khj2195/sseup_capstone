@@ -8,37 +8,7 @@ export const AuthContext = createContext();
 const AuthProvider = ({children}) => {
     const [users,setUsers] = useState(null);
     const [Id, setId] = useState();
-    const emailID= auth().currentUser.email.split("@")[0];
-    // const submitUser = (Id, InhalerType, GradeCard) => {
-    //     return new Promise(function(resolve, reject) {
-    //       let key;
-    //       if (Id != null) {
-    //         key = Id;
-    //         // console.log(key);
-    //       } else {
-    //         console.log(Id);
-    //         key = database()
-    //           .ref()
-    //           .push().key;
-    //       }
-    //       let dataToSave = {
-    //         Id: auth().currentUser.email,
-    //         InhalerType: InhalerType,
-    //         Date: getCurrentDate(),
-    //         GradeCard: GradeCard,
-    //       };
-    //       // console.log(key);
-    //       database()
-    //         .ref('users/'+ emailID+'/'+getCurrentTime())
-    //         .update(dataToSave)
-    //         .then(snapshot => {
-    //           resolve(snapshot);
-    //         })
-    //         .catch(error => {
-    //           reject(error);
-    //         });
-    //     });
-    //   };
+    const emailID= auth().currentUser? auth().currentUser.email.split("@")[0] : "";
     return (
         <AuthContext.Provider
             value={{
@@ -60,14 +30,15 @@ const AuthProvider = ({children}) => {
                       setUsers(email);
                     })
                     .catch(error => {
-                      reject(error);
                       Alert.alert('없는 계정입니다.');
+                      reject(error);
                     });
                 })},
                 register: async (email, password) => {
                     try {
                       await auth().createUserWithEmailAndPassword(email, password)
                       .then(()=>{
+                        firestore().collection(email.split("@")[0]).doc(email.split("@")[0]).set({InhalerType: 0});
                         Alert.alert('회원가입이 완료되었습니다! 로그인해주세요.');
                       })
                     } catch (e) {

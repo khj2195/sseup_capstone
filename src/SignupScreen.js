@@ -13,7 +13,7 @@ const SignupScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Create an account</Text>
+      <Text style={styles.text}>회원가입</Text>
 
       <FormInput
         labelValue={email}
@@ -42,7 +42,7 @@ const SignupScreen = ({navigation}) => {
       />
 
       <FormButton
-        buttonTitle="Sign Up"
+        buttonTitle="완료"
         onPress={() => {
           if(email.length===0){
             Alert.alert('이메일을 형식에 맞게 입력해 주세요. 예) Example@example.com')
@@ -61,9 +61,9 @@ const SignupScreen = ({navigation}) => {
 
       <View style={styles.textPrivate}>
         <Text style={styles.color_textPrivate}>
-          By registering, you confirm that you accept our{' '}
+          본 어플리케이션은 연구 목적으로 만들어졌습니다.
         </Text>
-        <TouchableOpacity onPress={() => alert('동의!')}>
+        {/* <TouchableOpacity onPress={() => alert('동의!')}>
             <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>
                 Terms of service
             </Text>
@@ -73,7 +73,7 @@ const SignupScreen = ({navigation}) => {
             <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>
             Privacy Policy
             </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
 
       <TouchableOpacity

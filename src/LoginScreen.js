@@ -29,7 +29,7 @@ const LoginScreen = ({navigation}) => {
       <FormInput
         labelValue={email}
         onChangeText={(userEmail) => setEmail(userEmail)}
-        placeholderText="Email"
+        placeholderText="이메일  예) Example@example.com"
         iconType="user"
         keyboardType="email-address"
         autoCapitalize="none"
@@ -39,13 +39,13 @@ const LoginScreen = ({navigation}) => {
       <FormInput
         labelValue={password}
         onChangeText={(userPassword) => setPassword(userPassword)}
-        placeholderText="Password"
+        placeholderText="비밀번호"
         iconType="lock"
         secureTextEntry={true}
       />
 
       <FormButton
-        buttonTitle="Log In"
+        buttonTitle="로그인"
         onPress={() => 
           {login(email, password);
           }
@@ -56,7 +56,7 @@ const LoginScreen = ({navigation}) => {
         style={styles.forgotButton}
         onPress={() => navigation.navigate('Signup')}>
         <Text style={styles.navButtonText}>
-          Create New Account
+          회원가입
         </Text>
       </TouchableOpacity>
     </ScrollView>
@@ -70,7 +70,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    paddingTop: 50
+    paddingTop: 50,
+    backgroundColor:'white',
+    flex:1
   },
   logo: {
     height: 50,

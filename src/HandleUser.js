@@ -9,10 +9,11 @@ const HandleUser = ({children}) => {
     const [InhalerType, setInhalerType] = useState(0);
     const [GradeCard, setGradeCard]=useState([]);
     const [score, setScore]=useState();
+    const [howmany, setHowmany]=useState(1);
     return (
         <UserContext.Provider
             value={{
-                Id, setId, InhalerType, setInhalerType, GradeCard, setGradeCard, score, setScore
+                Id, setId, InhalerType, setInhalerType, GradeCard, setGradeCard, score, setScore, howmany, setHowmany,
             }}>
                 {children}
         </UserContext.Provider>

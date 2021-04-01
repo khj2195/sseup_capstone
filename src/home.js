@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import firstTab from './firstTab';
 import secondTab from './secondTab';
 import thirdTab from './thirdTab';
+
 // import Icons from 'react-native-vector-icons/dist/Ionicons';
 
 const Tab = createBottomTabNavigator();
