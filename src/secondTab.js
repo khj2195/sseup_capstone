@@ -1,12 +1,16 @@
 import 'react-native-gesture-handler';
 import React, {Component, useContext, useEffect, useState} from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Dimensions } from 'react-native';
 import FormButton from './components/FormButton';
 import { GestureHandlerRefContext } from '@react-navigation/stack';
 import { useFocusEffect } from '@react-navigation/native';
 import { UserContext } from './HandleUser';
 import {AuthContext} from './AuthProvider';
 import firestore from '@react-native-firebase/firestore';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 const checklistContents = [[
   '1. 흡입기를 잘 흔든 후 바로 사용하였나요?',
   '2. 흡입기 사용 전 숨을 완전히 뱉었나요?',
@@ -49,8 +53,8 @@ const checklistDPI = [
 ];
 const tempDoc=[];
 const secondTab =({navigation}) => {
-  const {InhalerType, setInhalerType} = useContext(UserContext);
-  const [latestGrade, setLatestGrade]=useState([]);
+  const {InhalerType, setInhalerType, howmany} = useContext(UserContext);
+  const [latestGrade, setLatestGrade]=useState([0]);
   const {emailID} = useContext(AuthContext);
 
   useEffect(() => {
@@ -75,10 +79,10 @@ const secondTab =({navigation}) => {
   }, []);
 
   return(
-      latestGrade.length>0? 
+      howmany>1?
           <ScrollView style={styles.homeElementView}>
-              <Text style={{fontSize:20}}>{emailID}님이 잘못 사용하신 단계는</Text>
-              <View style={{borderWidth:1, marginBottom:15}}>
+              <Text style={{fontSize:20, marginBottom : 10, color : '#235EC3', fontWeight : "600"}}>{emailID}님이 잘못 사용하신 단계는</Text>
+              <View style={{borderWidth:0.5, marginBottom:15, borderColor : '#b2b2b2', backgroundColor : '#fbfbfb'}}>
                 {/* {InhalerType===1?
                 checklistMDI.map((mem, key)=>{
                   if(latestGrade[key]===2){
@@ -92,17 +96,17 @@ const secondTab =({navigation}) => {
                   }
                 })
                 } */}
-                {InhalerType>0 && checklistContents[InhalerType-1].map((mem, key)=>{
+                {latestGrade.length>0 && checklistContents[InhalerType-1].map((mem, key)=>{
                   if(latestGrade[key]===2){
-                    return <Text key={key} style={{fontSize:15, padding:3}}>{mem}</Text>
+                    return <Text key={key} style={{fontSize:14, padding:3}}>{mem}</Text>
                   }
                 })}
               </View>
-              <Text style={{fontSize:20}}>{emailID}님이 잘 사용하신 단계는</Text>
-              <View style={{borderWidth:1, marginBottom:5}}>
+              <Text style={{fontSize:20, marginBottom :10, fontWeight : "600", color : '#235EC3'}}>{emailID}님이 잘 사용하신 단계는</Text>
+              <View style={{borderWidth:0.5, marginBottom:5, padding : 5, borderColor : '#b2b2b2'}}>
                 {InhalerType>0 && checklistContents[InhalerType-1].map((mem, key)=>{
                   if(latestGrade[key]===1){
-                    return <Text key={key} style={{fontSize:15, padding:3}}>{mem}</Text>
+                    return <Text key={key} style={{fontSize:14, padding:3}}>{mem}</Text>
                   }
                 })}
               </View>
@@ -133,9 +137,10 @@ const styles= StyleSheet.create({
   homeElementView: {
     marginTop:10,
     marginBottom:10,
-    marginLeft: 12,
-    marginRight: 12,
-    padding: 20,
+    marginLeft: windowWidth/50,
+    marginRight: windowWidth/50,
+    paddingVertical :20,
+    paddingHorizontal :windowWidth/40,
     flex:1,
     backgroundColor: 'white',
     borderRadius: 10,

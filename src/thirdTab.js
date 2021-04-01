@@ -83,9 +83,14 @@ const thirdTab = ({navigation}) => {
   },[])
     return (
       <ScrollView>
-        <View style={{alignItems:'center'}}>
-           <Text style={{fontSize: 20, fontWeight: '500', color: 'black', marginTop:30, textAlign:'center'}}>
-             당신이 사용 중인 흡입기는
+        <View style={{
+          alignItems:'center',
+          paddingLeft : windowWidth/40,
+          paddingRight : windowWidth/40
+          
+          }}>
+           <Text style={{fontSize: 20, fontWeight: '500', color: 'black', marginTop:30, marginBottom : 10, textAlign:'center'}}>
+             현재 사용 중인 흡입기
            </Text>
             <Image
               source={InhalerType===1? require('./assets/images/MDI.png') : require('./assets/images/Seretide_diskus.png')}
@@ -99,26 +104,37 @@ const thirdTab = ({navigation}) => {
             />
          </View>
         {InhalerType>0 && dataList.map((mem,key)=>{
-          return <View key={key} style={{borderWidth:1, marginTop:10}}>
-                  <Text key={key} style={{fontSize:20, textAlign:'center'}}>사용 날짜: {idList[key].slice(0,9)}</Text>
-                  <Text key={key+100} style={{fontSize:17}}>잘 하신 점</Text>
+          return <View key={key} style={
+                                        {borderWidth:0.5, 
+                                         borderColor :'#b2b2b2',
+                                         marginTop:10,
+                                         marginHorizontal : windowWidth/40,
+                                         paddingLeft : 10,
+                                         paddingVertical : 10,
+                                         marginTop:20,
+
+                                         backgroundColor : '#f3f3f3'
+                                         }}>
+                  <Text key={key} style={{fontSize:20, textAlign:'center',fontWeight : '600'}}>{idList[key].slice(0,8)}</Text>
+                  <Text key={key+100} style={{fontSize:17, fontWeight : '600', marginBottom : 3 }}>잘 하신 점</Text>
                   {mem.map((mem2,key2)=>{
                     return (mem2===1 && <View key={key2}>
-                                  <Text key={key2} style={{fontSize:15}}>{checklistContents[InhalerType-1][key2]}</Text>
+                                  <Text key={key2} style={{fontSize:15, padding : 1}}>{checklistContents[InhalerType-1][key2]}</Text>
                                 </View>
                     )
                     })
                   }
-                  <Text key={key+200} style={{fontSize:17}}>보완할 점</Text>
+                  <Text key={key+200} style={{fontSize:17, fontWeight : '600', marginBottom : 3, marginTop : 5}}>보완할 점</Text>
                   {mem.map((mem2,key2)=>{
                     return (mem2===2 && <View key={key2}>
-                                  <Text key={key2} style={{fontSize:15}}>{checklistContents[InhalerType-1][key2]}</Text>
+                                  <Text key={key2} style={{fontSize:15, padding : 1}}>{checklistContents[InhalerType-1][key2]}</Text>
                                 </View>
                     )
                     })
                   }
                  </View>
         })}
+        <View style ={{marginHorizontal : windowWidth/40}}>
         <FormButton
           buttonTitle="로그아웃"
           onPress={() => {
@@ -128,7 +144,8 @@ const thirdTab = ({navigation}) => {
             logout();
             RNRestart.Restart();
           }}
-        />
+          
+        /></View>
       </ScrollView>
       // </View>
     )
@@ -142,6 +159,7 @@ const styles = StyleSheet.create({
     height: windowWidth/2,
     width: windowWidth/2,
     resizeMode: 'contain',
+    marginBottom : 10
   }
 });
 

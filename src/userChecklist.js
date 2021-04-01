@@ -72,12 +72,12 @@ const userChecklist = ({navigation}) => {
   };
   const makeChecklist = (array) => {
     return array.map((mem, key) => (
-      <View style={{flex: 1, padding: 10, flexDirection: 'column'}} key={key}>
+      <View style={{flex: 1, padding :8, paddingBottom : 3,paddingHorizontal : 12, flexDirection: 'column'}} key={key}>
         <View style={{flex: 1, AlignItems: 'stretch'}}>
           <Text style={styles.texts}>{mem}</Text>
         </View>
         <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={{flex: 5}}>
+          <View style={{flex: 5,height : 30}}>
             <TouchableOpacity
               onPress={() => {
                 checklist[key] = 1;
@@ -85,13 +85,18 @@ const userChecklist = ({navigation}) => {
                 console.log(checklist);
               }}
               style={{
-                backgroundColor: checklist[key] === 1 ? '#ABB8C3' : '#FFF',
+                backgroundColor: checklist[key] === 1 ? '#b5cef9' : '#FFF',
                 alignItems: 'center',
+                height :'100%',
+                justifyContent : 'center',
+                borderTopLeftRadius : 7,
+                borderBottomLeftRadius : 7
+                
               }}>
-              <Text style={{fontSize: 18}}>Yes</Text>
+              <Text style={{fontSize: 17}}>Yes</Text>
             </TouchableOpacity>
           </View>
-          <View style={{flex: 5}}>
+          <View style={{flex: 5, height : 30}}>
             <TouchableOpacity
               onPress={() => {
                 checklist[key] = 2;
@@ -99,10 +104,14 @@ const userChecklist = ({navigation}) => {
                 console.log(checklist);
               }}
               style={{
-                backgroundColor: checklist[key] === 2 ? '#ABB8C3' : '#FFF',
+                backgroundColor: checklist[key] === 2 ? '#b5cef9' : '#FFF',
                 alignItems: 'center',
+                height : '100%',
+                justifyContent : 'center',
+                borderTopRightRadius : 5,
+                borderBottomRightRadius : 5
               }}>
-              <Text style={{fontSize: 18}}>No</Text>
+              <Text style={{fontSize: 17}}>No</Text>
             </TouchableOpacity>
           </View>
         </View>
