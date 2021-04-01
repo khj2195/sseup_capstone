@@ -461,8 +461,10 @@
 			baseConfigurationReference = 0213BE883228130EEE7DAB23 /* Pods-sseup.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K76B4C64F9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = sseup/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -487,8 +489,10 @@
 			baseConfigurationReference = 8C2BB719C1146E48C5AE7533 /* Pods-sseup.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K76B4C64F9;
 				INFOPLIST_FILE = sseup/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
