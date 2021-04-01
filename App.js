@@ -9,6 +9,8 @@
  import React, {Component, useEffect} from 'react';
  import Route from './src/Route';
  import AuthProvider from './src/AuthProvider';
+ import SplashScreen from 'react-native-splash-screen';
+
 import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -29,6 +31,11 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const App: () => Node = () => {
+  useEffect(()=>{
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000);
+  },[])
   return (
     <AuthProvider><Route /></AuthProvider>
   );
