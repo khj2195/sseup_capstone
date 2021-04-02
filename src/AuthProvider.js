@@ -38,7 +38,11 @@ const AuthProvider = ({children}) => {
                     try {
                       await auth().createUserWithEmailAndPassword(email, password)
                       .then(()=>{
-                        firestore().collection(email.split("@")[0]).doc(email.split("@")[0]).set({InhalerType: 0});
+                        firestore().collection(email.split("@")[0]).doc(email.split("@")[0]).set(
+                          {
+                            InhalerType: 0,
+                            Count:0,
+                          });
                         Alert.alert('회원가입이 완료되었습니다! 로그인해주세요.');
                       })
                     } catch (e) {

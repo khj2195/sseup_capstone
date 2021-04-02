@@ -1,4 +1,3 @@
-
 import 'react-native-gesture-handler';
 import React, {Component, useContext, useState, useEffect} from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Alert } from 'react-native';
@@ -6,12 +5,14 @@ import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Alert } from 'rea
 import {AuthContext} from './AuthProvider';
 import {UserContext} from './HandleUser';
 import firestore from '@react-native-firebase/firestore';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const firstTab =({navigation})=> {
   const {emailID} = useContext(AuthContext);
   const {InhalerType, setInhalerType, howmany, setHowmany} =useContext(UserContext);
+  const hasLaunched=[false];
   useEffect(() => {
     async function firePromise() {
       try {
@@ -28,7 +29,7 @@ const firstTab =({navigation})=> {
       <View style={styles.homeFirstElementView}>
           <Text style={{fontSize:25, color:'#2e64e5',paddingBottom : 10}}>안녕하세요 {emailID}님!</Text>
           <Text style={{fontSize:16, paddingBottom :5}}>SSEUP과 함께 정확한 흡입기 사용법을 연습해보세요!</Text>
-          <Text style={{fontSize:16}}>지금까지 SSEUP과 함께 한 사용횟수는 총 {howmany-1}번입니다.</Text>
+          <Text style={{fontSize:16}}>지금까지 SSEUP과 함께 한 사용횟수는 총 {howmany<0? 0: howmany-1}번입니다.</Text>
       </View>
       <TouchableOpacity
         style={styles.homeElementView}
@@ -103,5 +104,6 @@ const styles= StyleSheet.create({
     // elevation: 5,
   }
 });
+
 
 export default firstTab;

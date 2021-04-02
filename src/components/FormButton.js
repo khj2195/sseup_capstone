@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
 
@@ -30,6 +29,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#ffffff',
-    // fontFamily: 'Lato-Regular',
-  }
+    fontFamily: 'Lato-Regular',
+  },
 });

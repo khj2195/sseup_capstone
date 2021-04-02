@@ -11,6 +11,8 @@ import {AuthContext} from './AuthProvider';
 import { UserContext } from './HandleUser';
 import ChooseScreen from './ChooseScreen';
 
+// import {ids, datas,months,dates} from './thirdTab';
+
 const Stack = createStackNavigator();
 
 const AppStack =()=> {

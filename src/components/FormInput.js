@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {View, TextInput, StyleSheet, Dimensions} from 'react-native';
 // import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     fontSize: 16,
-    // fontFamily: 'Lato-Regular',
+    fontFamily: 'Lato-Regular',
     color: '#333',
     justifyContent: 'center',
     alignItems: 'center',
